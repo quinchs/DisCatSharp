@@ -66,7 +66,7 @@
   branches:
     only:
     - /release/
-  version: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+  version: 9.5.5
   pull_requests:
     do_not_increment_build_number: true
   skip_tags: true
