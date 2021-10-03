@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"discord.lowerDetailsEditing": "Editing {file_name}:{current_line}/{total_lines}",
+		"discord.detailsEditing": "Working on {git_repo_name} ({git_branch})",
+		"discord.lowerDetailsDebugging": "Debugging: {file_name}",
+		"discord.detailsDebugging": "Working on {git_repo_name} ({git_branch})"
+	}
+}
