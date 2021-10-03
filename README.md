@@ -82,6 +82,3 @@ Big thanks goes to the following people who helps us ♥️
 - [Johannes](https://github.com/JMLutra)
 - [Geferon](https://github.com/geferon)
 - [Alice](https://github.com/mortAlice)
-
-## Notice
-Feel free to re-use code in DSharpPlus.
