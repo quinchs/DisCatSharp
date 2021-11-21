@@ -21,46 +21,39 @@
 // SOFTWARE.
 
 using DisCatSharp.Enums;
-using DisCatSharp.EventArgs;
 using Newtonsoft.Json;
 
 namespace DisCatSharp.Entities
 {
 
     /// <summary>
-    /// Represents a button that can be pressed. Fires <see cref="ComponentInteractionCreateEventArgs"/> when pressed.
+    /// Represents a text component that can be submitted. Fires <see cref="DisCatSharp.DiscordClient.ComponentInteractionCreated"/> event when submitted.
     /// </summary>
-    public sealed class DiscordButtonComponent : DiscordComponent
+    public sealed class DiscordTextComponent : DiscordComponent
     {
         /// <summary>
-        /// The style of the button.
+        /// The style of the text component.
         /// </summary>
         [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
-        public ButtonStyle Style { get; internal set; }
+        public TextComponentStyle Style { get; internal set; }
 
         /// <summary>
-        /// The text to apply to the button. If this is not specified <see cref="Emoji"/> becomes required.
+        /// The text to apply to the text component.
         /// </summary>
         [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
         public string Label { get; internal set; }
 
         /// <summary>
-        /// Whether this button can be pressed.
+        /// Whether this text component can be used.
         /// </summary>
         [JsonProperty("disabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool Disabled { get; internal set; }
 
         /// <summary>
-        /// The emoji to add to the button. Can be used in conjunction with a label, or as standalone. Must be added if label is not specified.
-        /// </summary>
-        [JsonProperty("emoji", NullValueHandling = NullValueHandling.Ignore)]
-        public DiscordComponentEmoji Emoji { get; internal set; }
-
-        /// <summary>
         /// Enables this component if it was disabled before.
         /// </summary>
         /// <returns>The current component.</returns>
-        public DiscordButtonComponent Enable()
+        public DiscordTextComponent Enable()
         {
             this.Disabled = false;
             return this;
@@ -70,49 +63,46 @@ namespace DisCatSharp.Entities
         /// Disables this component.
         /// </summary>
         /// <returns>The current component.</returns>
-        public DiscordButtonComponent Disable()
+        public DiscordTextComponent Disable()
         {
             this.Disabled = true;
             return this;
         }
 
         /// <summary>
-        /// Constructs a new <see cref="DiscordButtonComponent"/>.
+        /// Constructs a new <see cref="DiscordTextComponent"/>.
         /// </summary>
-        internal DiscordButtonComponent()
+        internal DiscordTextComponent()
         {
-            this.Type = ComponentType.Button;
+            this.Type = ComponentType.InputText;
         }
 
         /// <summary>
-        /// Constucts a new button based on another button.
+        /// Constucts a new text component based on another text component.
         /// </summary>
         /// <param name="other">The button to copy.</param>
-        public DiscordButtonComponent(DiscordButtonComponent other) : this()
+        public DiscordTextComponent(DiscordTextComponent other) : this()
         {
             this.CustomId = other.CustomId;
             this.Style = other.Style;
             this.Label = other.Label;
             this.Disabled = other.Disabled;
-            this.Emoji = other.Emoji;
         }
 
         /// <summary>
-        /// Constructs a new button with the specified options.
+        /// Constructs a new text component field with the specified options.
         /// </summary>
-        /// <param name="style">The style/color of the button.</param>
-        /// <param name="customId">The Id to assign to the button. This is sent back when a user presses it.</param>
-        /// <param name="label">The text to display on the button, up to 80 characters. Can be left blank if <paramref name="emoji"/>is set.</param>
-        /// <param name="disabled">Whether this button should be initialized as being disabled. User sees a greyed out button that cannot be interacted with.</param>
-        /// <param name="emoji">The emoji to add to the button. This is required if <paramref name="label"/> is empty or null.</param>
-        public DiscordButtonComponent(ButtonStyle style, string customId, string label, bool disabled = false, DiscordComponentEmoji emoji = null)
+        /// <param name="style">The style of the text component.</param>
+        /// <param name="customId">The Id to assign to the text component. This is sent back when a user presses it.</param>
+        /// <param name="label">The text to display before the text component, up to 80 characters.</param>
+        /// <param name="disabled">Whether this text component should be initialized as being disabled.</param>
+        public DiscordTextComponent(TextComponentStyle style, string customId, string label, bool disabled = false)
         {
             this.Style = style;
             this.Label = label;
             this.CustomId = customId;
             this.Disabled = disabled;
-            this.Emoji = emoji;
-            this.Type = ComponentType.Button;
+            this.Type = ComponentType.InputText;
         }
     }
 }
